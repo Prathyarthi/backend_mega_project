@@ -2,7 +2,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
-app = express()
+const app = express()
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,      // To get request from this frontend_url
@@ -14,4 +14,10 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }))      // It means 
 app.use(express.static('public'))     // To store public files, folders or assets
 app.use(cookieParser())
 
-export default app
+import userRouter from "./routes/user.routes.js"
+
+// Routes declaration
+app.use("/api/v1/users", userRouter)
+
+
+export { app }
